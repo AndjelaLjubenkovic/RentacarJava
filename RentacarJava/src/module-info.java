@@ -6,4 +6,5 @@
  *
  */
 module RentacarJava {
+	requires java.sql;
 }
