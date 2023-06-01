@@ -2,6 +2,9 @@ package controller;
 
 import java.sql.*;
 
+import konekcija.DatabaseConnection;
+
+
 
 
 public class UserController {
@@ -13,12 +16,7 @@ public class UserController {
 	 */
 	
 	public UserController() {
-        // Inicijalizacija konekcije s bazom podataka
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/rentacar", "root", "");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+		connection = DatabaseConnection.getInstance().getConnection();
     }
 	/**
 	 * 

@@ -4,21 +4,24 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import konekcija.DatabaseConnection;
 import model.Klijent;
-
+import konekcija.DatabaseConnection;
 public class ClientController {
 	
 	private Connection connection;
 
+	/**
+	 * konekcija za mysql bazu u konstruktoru
+	 */
     public ClientController() {
-        // Inicijalizacija konekcije s bazom podataka
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/rentacar", "root", "");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    	connection = DatabaseConnection.getInstance().getConnection();
     }
-
+    
+    /**
+     * Sluzi za kreiranje novog klijenta
+     * @param client
+     */
     public void createClient(Klijent client) {
         try {
             // Priprema SQL upita
@@ -41,6 +44,11 @@ public class ClientController {
         }
     }
 
+    /**
+     * 
+     * @vraca sve klijente
+     * Sluzi za dobijanje svih klijenata
+     */
     public List<Klijent> getAllClients() {
         List<Klijent> clients = new ArrayList<>();
 
@@ -71,6 +79,11 @@ public class ClientController {
         return clients;
     }
 
+    /**
+     * 
+     * @param id
+     * @vraca jednog klijenta
+     */
     public Klijent getClientById(int id) {
         try {
             // Priprema SQL upita
@@ -100,5 +113,40 @@ public class ClientController {
         }
 
         return null;
+    }
+    
+    /**
+     * 
+     * @param updatedClient
+     * sluzi za azuriranje postojeceg klijenta
+     */
+    public void updateClient(Klijent updatedClient) {
+        String sql = "UPDATE clients SET ime=?, prezime=?, broj_telefona=?, broj_vozacke=?,user_id=? WHERE klijent_id=?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, updatedClient.getIme());
+            statement.setString(2, updatedClient.getPrezime());
+            statement.setString(3, updatedClient.getBroj_telefona());
+            statement.setString(4, updatedClient.getBroj_vozacke());
+            statement.setInt(5, updatedClient.getUser_id());
+            statement.setInt(6, updatedClient.getKlijent_id());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 
+     * @param clientId
+     * sluzi za brisanje klijenta
+     */
+    public void deleteClient(int clientId) {
+        String sql = "DELETE FROM clients WHERE klijent_id=?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, clientId);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
