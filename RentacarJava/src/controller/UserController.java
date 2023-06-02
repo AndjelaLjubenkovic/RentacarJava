@@ -78,11 +78,20 @@ public class UserController {
 	        }
 	    }
 /**
- * metoda logout sluzi za odjavljivanje korisnika iz sistema
+ * 
+ * @param userId
+ * metoda sluzi za logout korisnika
  */
-	    public void logout() {
-	        // Implementirajte odgovarajuću logiku za odjavu korisnika
-	        System.out.println("Uspješna odjava.");
+	    public void logout(int userId) {
+	        String query = "UPDATE user SET logged_in = 0 WHERE user_id = ?";
+	        try {
+	            PreparedStatement statement = connection.prepareStatement(query);
+	            statement.setInt(1, userId);
+
+	            statement.executeUpdate();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
 	    }
 	    
 	    

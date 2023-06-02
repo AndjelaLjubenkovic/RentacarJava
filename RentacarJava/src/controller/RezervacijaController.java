@@ -49,14 +49,11 @@ public class RezervacijaController {
                 int rezervacijaId = resultSet.getInt("rezervacija_id");
                 int klijentId = resultSet.getInt("klijent_id");
                 int autoId = resultSet.getInt("auto_id");
-
                 Rezervacija rezervacija = new Rezervacija();
                 rezervacija.setRezervacija_id(rezervacijaId);
                 rezervacija.setKlijent_id(klijentId);
                 rezervacija.setAuto_id(autoId);
-
                 rezervacije.add(rezervacija);
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
