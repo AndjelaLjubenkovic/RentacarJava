@@ -1,23 +1,27 @@
 package test;
 
-//import org.junit.jupiter.api.Test;
 import org.xml.sax.InputSource;
-//import org.junit.jupiter.api.Assertions;
+
+import konekcija.DatabaseConnection;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import org.dbunit.DBTestCase;
 
 import org.dbunit.PropertiesBasedJdbcDatabaseTester;
 import org.dbunit.database.DatabaseConfig;
-//import org.dbunit.database.DatabaseConnection;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.ext.mysql.MySqlDataTypeFactory;
-//import org.dbunit.dataset.json.JsonDataSet;
-//import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
+import org.junit.jupiter.api.Test;
 
 
 
 
 public class DatabaseConnectionTest extends DBTestCase {
+	
+	private Connection connection;
 	
 	/**
 	 * 
@@ -31,6 +35,8 @@ public class DatabaseConnectionTest extends DBTestCase {
 	    System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_CONNECTION_URL, "jdbc:mysql://localhost/test_rentcar");
 	    System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_USERNAME, "root");
 	    System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD, "");
+	    
+	    connection = DatabaseConnection.getInstance().getConnection();
 	  }
 	/**
 	 *   
@@ -59,5 +65,16 @@ public class DatabaseConnectionTest extends DBTestCase {
 	    config.setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY, new MySqlDataTypeFactory());
 	  }
 	  
+	  /**
+	   * 
+	   * @throws SQLException
+	   * Metoda testZatvoriKonekciju proverava zatvaranje konekcija
+	   */
+	  @Test
+	    public void testZatvoriKonekciju() throws SQLException {
+
+	    	((DatabaseConnection) connection).zatvoriKonekciju();
+	        assertTrue(((DatabaseConnection) connection).isKonekcijaZatvorena());
+	    }
 	
 }

@@ -8,19 +8,16 @@ import controller.AutoController;
 import konekcija.DatabaseConnection;
 import model.Auto;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 
 public class AutoControllerTest {
 
     private AutoController autoController;
-    private Connection connection;
-
+    
     @BeforeEach
     public void setUp() {
         autoController = new AutoController();
-        connection = DatabaseConnection.getInstance().getConnection();
+        DatabaseConnection.getInstance().getConnection();
     }
 
     /**
@@ -86,14 +83,4 @@ public class AutoControllerTest {
         assertFalse(auti.isEmpty());
     }
 
-    /**
-     * Testiranje zatvaranja konekcije
-     * @throws SQLException 
-     */
-    @Test
-    public void testZatvoriKonekciju() throws SQLException {
-
-    	((DatabaseConnection) connection).zatvoriKonekciju();
-        assertTrue(((DatabaseConnection) connection).isKonekcijaZatvorena());
-    }
 }
