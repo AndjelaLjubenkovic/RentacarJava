@@ -18,6 +18,8 @@ public class UserController {
 	public UserController() {
 		connection = DatabaseConnection.getInstance().getConnection();
     }
+	
+
 	/**
 	 * 
 	 * @param username
@@ -29,7 +31,7 @@ public class UserController {
 	  public void register(String username, String password, String email) {
 	        try {
 	            // Priprema SQL upita
-	            String query = "INSERT INTO user (username, password, email) VALUES (?, ?, ?)";
+	            String query = "INSERT INTO User (username, password, email) VALUES (?, ?, ?)";
 	            PreparedStatement preparedStatement = connection.prepareStatement(query);
 
 	            // Postavljanje parametara upita
@@ -39,8 +41,8 @@ public class UserController {
 
 	            // Izvršavanje upita
 	            preparedStatement.executeUpdate();
+	            connection.zatvoriKonekciju();
 
-	            System.out.println("Uspješna registracija. Dobrodošli, " + username + "!");
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -55,7 +57,7 @@ public class UserController {
 	    public boolean login(String username, String password) {
 	        try {
 	            // Priprema SQL upita
-	            String query = "SELECT * FROM user WHERE username = ? AND password = ?";
+	            String query = "SELECT * FROM User WHERE username = ? AND password = ?";
 	            PreparedStatement preparedStatement = connection.prepareStatement(query);
 
 	            // Postavljanje parametara upita
@@ -64,38 +66,21 @@ public class UserController {
 
 	            // Izvršavanje upita
 	            ResultSet resultSet = preparedStatement.executeQuery();
+	            
 
 	            // Provjera rezultata upita
 	            if (resultSet.next()) {
-	                System.out.println("Uspješna prijava. Dobrodošli, " + username + "!");
 	                return true;
 	            } else {
-	                System.out.println("Pogrešno korisničko ime ili lozinka.");
 	                return false;
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	            return false;
 	        }
+	        connection.zatvoriKonekciju();
 	    }
-/**
- * metoda logout sluzi za odjavljivanje korisnika iz sistema
- */
-	    public void logout() {
-	        // Implementirajte odgovarajuću logiku za odjavu korisnika
-	        System.out.println("Uspješna odjava.");
-	    }
+
 	    
-	    /**
-	     * ova metoda zatvara konekciju
-	     */
-	    public void zatvoriKonekciju() {
-	        try {
-	            if (connection != null && !connection.isClosed()) {
-	                connection.close();
-	            }
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
-	    }
+	    
 }

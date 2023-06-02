@@ -19,13 +19,15 @@ public class RezervacijaController {
  * ova metoda pravi novu rezervaciju
  */
     public void dodajRezervaciju(Rezervacija rezervacija) {
-        String query = "INSERT INTO rezervacija (klijent_id, auto_id) VALUES (?, ?)";
+        String query = "INSERT INTO Rezervacija (klijent_id, auto_id) VALUES (?, ?)";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, rezervacija.getKlijent_id());
             statement.setInt(2, rezervacija.getAuto_id());
 
             statement.executeUpdate();
+            connection.zatvoriKonekciju();
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -38,7 +40,7 @@ public class RezervacijaController {
 
     public List<Rezervacija> dobaviSveRezervacije() {
         List<Rezervacija> rezervacije = new ArrayList<>();
-        String query = "SELECT * FROM rezervacija";
+        String query = "SELECT * FROM Rezervacija";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
@@ -47,12 +49,10 @@ public class RezervacijaController {
                 int rezervacijaId = resultSet.getInt("rezervacija_id");
                 int klijentId = resultSet.getInt("klijent_id");
                 int autoId = resultSet.getInt("auto_id");
-
                 Rezervacija rezervacija = new Rezervacija();
                 rezervacija.setRezervacija_id(rezervacijaId);
                 rezervacija.setKlijent_id(klijentId);
                 rezervacija.setAuto_id(autoId);
-
                 rezervacije.add(rezervacija);
             }
         } catch (SQLException e) {
@@ -60,18 +60,7 @@ public class RezervacijaController {
         }
 
         return rezervacije;
+        connection.zatvoriKonekciju();
     }
     
-    /**
-     * ova metoda zatvara konekciju
-     */
-    public void zatvoriKonekciju() {
-        try {
-            if (connection != null && !connection.isClosed()) {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }
