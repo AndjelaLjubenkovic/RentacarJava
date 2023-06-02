@@ -85,4 +85,17 @@ public class UserController {
 	        // Implementirajte odgovarajuću logiku za odjavu korisnika
 	        System.out.println("Uspješna odjava.");
 	    }
+	    
+	    /**
+	     * ova metoda zatvara konekciju
+	     */
+	    public void zatvoriKonekciju() {
+	        try {
+	            if (connection != null && !connection.isClosed()) {
+	                connection.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
 }

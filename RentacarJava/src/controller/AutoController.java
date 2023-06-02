@@ -101,4 +101,17 @@ public class AutoController {
 
         return auti;
     }
+    
+    /**
+     * ova metoda zatvara konekciju
+     */
+    public void zatvoriKonekciju() {
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
