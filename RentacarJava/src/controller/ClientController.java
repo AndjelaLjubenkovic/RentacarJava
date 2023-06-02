@@ -37,8 +37,7 @@ public class ClientController {
 
             // Izvršavanje upita
             preparedStatement.executeUpdate();
-
-            System.out.println("Klijent uspešno kreiran.");
+            connection.zatvoriKonekciju();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -77,6 +76,7 @@ public class ClientController {
         }
 
         return clients;
+        connection.zatvoriKonekciju();
     }
 
     /**
@@ -105,8 +105,8 @@ public class ClientController {
                 client.setBroj_telefona(resultSet.getString("broj_telefona"));
                 client.setBroj_vozacke(resultSet.getString("broj_vozacke"));
                 client.setUser_id(resultSet.getInt("user_id"));
-
                 return client;
+                connection.zatvoriKonekciju();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -121,7 +121,7 @@ public class ClientController {
      * sluzi za azuriranje postojeceg klijenta
      */
     public void updateClient(Klijent updatedClient) {
-        String sql = "UPDATE clients SET ime=?, prezime=?, broj_telefona=?, broj_vozacke=?,user_id=? WHERE klijent_id=?";
+        String sql = "UPDATE Klijent SET ime=?, prezime=?, broj_telefona=?, broj_vozacke=?,user_id=? WHERE klijent_id=?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, updatedClient.getIme());
             statement.setString(2, updatedClient.getPrezime());
@@ -130,6 +130,7 @@ public class ClientController {
             statement.setInt(5, updatedClient.getUser_id());
             statement.setInt(6, updatedClient.getKlijent_id());
             statement.executeUpdate();
+            connection.zatvoriKonekciju();          
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -141,25 +142,14 @@ public class ClientController {
      * sluzi za brisanje klijenta
      */
     public void deleteClient(int clientId) {
-        String sql = "DELETE FROM clients WHERE klijent_id=?";
+        String sql = "DELETE FROM Klijent WHERE klijent_id=?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, clientId);
             statement.executeUpdate();
+            connection.zatvoriKonekciju();            
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    /**
-     * ova metoda zatvara konekciju
-     */
-    
-    public void zatvoriKonekciju() {
-        try {
-            if (connection != null && !connection.isClosed()) {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+   
 }
