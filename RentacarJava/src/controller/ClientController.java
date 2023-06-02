@@ -121,7 +121,7 @@ public class ClientController {
      * sluzi za azuriranje postojeceg klijenta
      */
     public void updateClient(Klijent updatedClient) {
-        String sql = "UPDATE clients SET ime=?, prezime=?, broj_telefona=?, broj_vozacke=?,user_id=? WHERE klijent_id=?";
+        String sql = "UPDATE Klijent SET ime=?, prezime=?, broj_telefona=?, broj_vozacke=?,user_id=? WHERE klijent_id=?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, updatedClient.getIme());
             statement.setString(2, updatedClient.getPrezime());
@@ -142,7 +142,7 @@ public class ClientController {
      * sluzi za brisanje klijenta
      */
     public void deleteClient(int clientId) {
-        String sql = "DELETE FROM clients WHERE klijent_id=?";
+        String sql = "DELETE FROM Klijent WHERE klijent_id=?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, clientId);
             statement.executeUpdate();

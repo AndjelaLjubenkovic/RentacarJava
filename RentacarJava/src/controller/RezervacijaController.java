@@ -19,7 +19,7 @@ public class RezervacijaController {
  * ova metoda pravi novu rezervaciju
  */
     public void dodajRezervaciju(Rezervacija rezervacija) {
-        String query = "INSERT INTO rezervacija (klijent_id, auto_id) VALUES (?, ?)";
+        String query = "INSERT INTO Rezervacija (klijent_id, auto_id) VALUES (?, ?)";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, rezervacija.getKlijent_id());
@@ -40,7 +40,7 @@ public class RezervacijaController {
 
     public List<Rezervacija> dobaviSveRezervacije() {
         List<Rezervacija> rezervacije = new ArrayList<>();
-        String query = "SELECT * FROM rezervacija";
+        String query = "SELECT * FROM Rezervacija";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();

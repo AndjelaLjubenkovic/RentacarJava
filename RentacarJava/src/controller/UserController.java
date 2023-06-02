@@ -18,6 +18,8 @@ public class UserController {
 	public UserController() {
 		connection = DatabaseConnection.getInstance().getConnection();
     }
+	
+
 	/**
 	 * 
 	 * @param username
@@ -29,7 +31,7 @@ public class UserController {
 	  public void register(String username, String password, String email) {
 	        try {
 	            // Priprema SQL upita
-	            String query = "INSERT INTO user (username, password, email) VALUES (?, ?, ?)";
+	            String query = "INSERT INTO User (username, password, email) VALUES (?, ?, ?)";
 	            PreparedStatement preparedStatement = connection.prepareStatement(query);
 
 	            // Postavljanje parametara upita
@@ -55,7 +57,7 @@ public class UserController {
 	    public boolean login(String username, String password) {
 	        try {
 	            // Priprema SQL upita
-	            String query = "SELECT * FROM user WHERE username = ? AND password = ?";
+	            String query = "SELECT * FROM User WHERE username = ? AND password = ?";
 	            PreparedStatement preparedStatement = connection.prepareStatement(query);
 
 	            // Postavljanje parametara upita
@@ -64,7 +66,7 @@ public class UserController {
 
 	            // Izvršavanje upita
 	            ResultSet resultSet = preparedStatement.executeQuery();
-	            connection.zatvoriKonekciju();
+	            
 
 	            // Provjera rezultata upita
 	            if (resultSet.next()) {
@@ -76,23 +78,9 @@ public class UserController {
 	            e.printStackTrace();
 	            return false;
 	        }
+	        connection.zatvoriKonekciju();
 	    }
-/**
- * 
- * @param userId
- * metoda sluzi za logout korisnika
- */
-	    public void logout(int userId) {
-	        String query = "UPDATE user SET logged_in = 0 WHERE user_id = ?";
-	        try {
-	            PreparedStatement statement = connection.prepareStatement(query);
-	            statement.setInt(1, userId);
 
-	            statement.executeUpdate();
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
-	    }
 	    
 	    
 }

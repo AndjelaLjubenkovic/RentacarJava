@@ -19,7 +19,7 @@ public class AutoController {
  * ova metoda dodaje novi auto
  */
     public void dodajAuto(Auto auto) {
-        String query = "INSERT INTO auto (marka, model, godiste, is_iznajmljen) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO Auto (marka, model, godiste, is_iznajmljen) VALUES (?, ?, ?, ?)";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, auto.getMarka());
@@ -39,7 +39,7 @@ public class AutoController {
      * @return vraca jedan auto po id
      */
     public Auto dobaviAuto(int autoId) {
-        String query = "SELECT * FROM auto WHERE auto_id = ?";
+        String query = "SELECT * FROM Auto WHERE auto_id = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, autoId);
@@ -75,7 +75,7 @@ public class AutoController {
  * ova metoda azurira novi auto
  */
     public void azurirajAuto(Auto auto) {
-        String query = "UPDATE auto SET marka=?, model=?, godiste=?, is_iznajmljen=? WHERE auto_id=?";
+        String query = "UPDATE Auto SET marka=?, model=?, godiste=?, is_iznajmljen=? WHERE auto_id=?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, auto.getMarka());
@@ -96,7 +96,7 @@ public class AutoController {
  * ova metoda brise auto
  */
     public void obrisiAuto(int autoId) {
-        String query = "DELETE FROM auto WHERE auto_id=?";
+        String query = "DELETE FROM Auto WHERE auto_id=?";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, autoId);
@@ -113,7 +113,7 @@ public class AutoController {
  */
     public List<Auto> dobaviSveAute() {
         List<Auto> auti = new ArrayList<>();
-        String query = "SELECT * FROM auto";
+        String query = "SELECT * FROM Auto";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
