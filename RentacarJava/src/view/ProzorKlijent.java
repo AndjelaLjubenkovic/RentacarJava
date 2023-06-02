@@ -76,18 +76,22 @@ public class ProzorKlijent {
 		tbBrDozvole.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Ime");
+		lblNewLabel.setFont(new Font("Apple Braile", Font.PLAIN, 12));
 		lblNewLabel.setBounds(49, 20, 23, 16);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Prezime");
+		lblNewLabel_1.setFont(new Font("Apple Braile", Font.PLAIN, 12));
 		lblNewLabel_1.setBounds(48, 74, 49, 16);
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Broj Telefona");
+		lblNewLabel_2.setFont(new Font("Apple Braile", Font.PLAIN, 12));
 		lblNewLabel_2.setBounds(48, 130, 82, 16);
 		frame.getContentPane().add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Broj Vozacke dozvole");
+		lblNewLabel_3.setFont(new Font("Apple Braile", Font.PLAIN, 12));
 		lblNewLabel_3.setBounds(48, 180, 144, 16);
 		frame.getContentPane().add(lblNewLabel_3);
 		
@@ -98,11 +102,14 @@ public class ProzorKlijent {
 			}
 		});
 		btnKreiraj.setBounds(205, 317, 187, 43);
+		btnKreiraj.setFont(new Font("Apple Braile", Font.PLAIN, 12));
 		frame.getContentPane().add(btnKreiraj);
 		
 		JButton btnReset = new JButton("Resetuj");
+		btnReset.setFont(new Font("Apple Braile", Font.PLAIN, 12));
 		btnReset.setBounds(17, 317, 187, 43);
 		frame.getContentPane().add(btnReset);
+		
 	}
 
 }
