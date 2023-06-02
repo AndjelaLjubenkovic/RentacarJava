@@ -41,11 +41,12 @@ public class UserController {
 
 	            // Izvršavanje upita
 	            preparedStatement.executeUpdate();
-	            connection.zatvoriKonekciju();
 
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
+	        
+	        ((DatabaseConnection) connection).zatvoriKonekciju();
 	    }
 /**
  * 
@@ -54,7 +55,7 @@ public class UserController {
  * @return boolean
  * login metoda sluzi za logovanje na sistem
  */
-	    public boolean login(String username, String password) {
+	    public void login(String username, String password) {
 	        try {
 	            // Priprema SQL upita
 	            String query = "SELECT * FROM User WHERE username = ? AND password = ?";
@@ -64,21 +65,16 @@ public class UserController {
 	            preparedStatement.setString(1, username);
 	            preparedStatement.setString(2, password);
 
-	            // Izvršavanje upita
-	            ResultSet resultSet = preparedStatement.executeQuery();
+	            try (// Izvršavanje upita
+				ResultSet resultSet = preparedStatement.executeQuery()) {
+				}
 	            
 
-	            // Provjera rezultata upita
-	            if (resultSet.next()) {
-	                return true;
-	            } else {
-	                return false;
-	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();
-	            return false;
 	        }
-	        connection.zatvoriKonekciju();
+	        ((DatabaseConnection) connection).zatvoriKonekciju();
+
 	    }
 
 	    

@@ -6,7 +6,7 @@ import java.util.List;
 
 import konekcija.DatabaseConnection;
 import model.Klijent;
-import konekcija.DatabaseConnection;
+
 public class ClientController {
 	
 	private Connection connection;
@@ -37,7 +37,7 @@ public class ClientController {
 
             // Izvršavanje upita
             preparedStatement.executeUpdate();
-            connection.zatvoriKonekciju();
+            ((DatabaseConnection) connection).zatvoriKonekciju();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -75,8 +75,9 @@ public class ClientController {
             e.printStackTrace();
         }
 
+        ((DatabaseConnection) connection).zatvoriKonekciju();
         return clients;
-        connection.zatvoriKonekciju();
+
     }
 
     /**
@@ -106,12 +107,12 @@ public class ClientController {
                 client.setBroj_vozacke(resultSet.getString("broj_vozacke"));
                 client.setUser_id(resultSet.getInt("user_id"));
                 return client;
-                connection.zatvoriKonekciju();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+        ((DatabaseConnection) connection).zatvoriKonekciju();
         return null;
     }
     
@@ -130,10 +131,12 @@ public class ClientController {
             statement.setInt(5, updatedClient.getUser_id());
             statement.setInt(6, updatedClient.getKlijent_id());
             statement.executeUpdate();
-            connection.zatvoriKonekciju();          
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
+        ((DatabaseConnection) connection).zatvoriKonekciju();
     }
 
     /**
@@ -146,10 +149,12 @@ public class ClientController {
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, clientId);
             statement.executeUpdate();
-            connection.zatvoriKonekciju();            
+           
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
+        ((DatabaseConnection) connection).zatvoriKonekciju();
     }
    
 }

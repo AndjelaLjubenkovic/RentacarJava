@@ -28,7 +28,7 @@ public class AutoController {
             statement.setBoolean(4, auto.isIznajmljen());
 
             statement.executeUpdate();
-            connection.zatvoriKonekciju();
+            ((DatabaseConnection) connection).zatvoriKonekciju();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -53,14 +53,15 @@ public class AutoController {
                 boolean isIznajmljen = resultSet.getBoolean("is_iznajmljen");
 
                 Auto auto = new Auto();
-                auto.setAutoId(autoId);
+                auto.setAuto_id(autoId);
                 auto.setMarka(marka);
                 auto.setModel(model);
                 auto.setGodiste(godiste);
                 auto.setIznajmljen(isIznajmljen);
 
+                ((DatabaseConnection) connection).zatvoriKonekciju();
                 return auto;
-                connection.zatvoriKonekciju();
+                
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,7 +86,7 @@ public class AutoController {
             statement.setInt(5, auto.getAuto_id());
 
             statement.executeUpdate();
-            connection.zatvoriKonekciju();
+            ((DatabaseConnection) connection).zatvoriKonekciju();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -100,7 +101,7 @@ public class AutoController {
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, autoId);
-            connection.zatvoriKonekciju();
+            ((DatabaseConnection) connection).zatvoriKonekciju();
 
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -138,8 +139,8 @@ public class AutoController {
             e.printStackTrace();
         }
 
+        ((DatabaseConnection) connection).zatvoriKonekciju();
         return auti;
-        connection.zatvoriKonekciju();
     }
     
     

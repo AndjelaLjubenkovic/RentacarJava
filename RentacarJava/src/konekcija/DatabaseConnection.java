@@ -46,7 +46,7 @@ public class DatabaseConnection {
         }
     }
     
-    public boolean isKonekcijaZatvorena()
+    public boolean isKonekcijaZatvorena() throws SQLException
     {
     	if (connection != null && !connection.isClosed()) {
     		return true;
