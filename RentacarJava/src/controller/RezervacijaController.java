@@ -61,4 +61,17 @@ public class RezervacijaController {
 
         return rezervacije;
     }
+    
+    /**
+     * ova metoda zatvara konekciju
+     */
+    public void zatvoriKonekciju() {
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
