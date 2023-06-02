@@ -32,5 +32,28 @@ public class DatabaseConnection {
     public Connection getConnection() {
         return connection;
     }
+    
+    /**
+     * ova metoda zatvara konekciju
+     */
+    public void zatvoriKonekciju() {
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public boolean isKonekcijaZatvorena()
+    {
+    	if (connection != null && !connection.isClosed()) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
+    }
 }
 

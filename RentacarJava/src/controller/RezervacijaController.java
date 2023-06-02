@@ -26,6 +26,8 @@ public class RezervacijaController {
             statement.setInt(2, rezervacija.getAuto_id());
 
             statement.executeUpdate();
+            connection.zatvoriKonekciju();
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -54,24 +56,14 @@ public class RezervacijaController {
                 rezervacija.setAuto_id(autoId);
 
                 rezervacije.add(rezervacija);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         return rezervacije;
+        connection.zatvoriKonekciju();
     }
     
-    /**
-     * ova metoda zatvara konekciju
-     */
-    public void zatvoriKonekciju() {
-        try {
-            if (connection != null && !connection.isClosed()) {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }

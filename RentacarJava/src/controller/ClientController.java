@@ -37,6 +37,7 @@ public class ClientController {
 
             // Izvršavanje upita
             preparedStatement.executeUpdate();
+            connection.zatvoriKonekciju();
 
             System.out.println("Klijent uspešno kreiran.");
         } catch (SQLException e) {
@@ -77,6 +78,7 @@ public class ClientController {
         }
 
         return clients;
+        connection.zatvoriKonekciju();
     }
 
     /**
@@ -107,6 +109,7 @@ public class ClientController {
                 client.setUser_id(resultSet.getInt("user_id"));
 
                 return client;
+                connection.zatvoriKonekciju();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -130,6 +133,8 @@ public class ClientController {
             statement.setInt(5, updatedClient.getUser_id());
             statement.setInt(6, updatedClient.getKlijent_id());
             statement.executeUpdate();
+            connection.zatvoriKonekciju();
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -145,21 +150,11 @@ public class ClientController {
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, clientId);
             statement.executeUpdate();
+            connection.zatvoriKonekciju();
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    /**
-     * ova metoda zatvara konekciju
-     */
-    
-    public void zatvoriKonekciju() {
-        try {
-            if (connection != null && !connection.isClosed()) {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+   
 }
