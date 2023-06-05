@@ -71,4 +71,27 @@ public class Auto {
 	    // TODO - implement Auto.Auto
 	    throw new UnsupportedOperationException();
 	}
+
+	public boolean isIs_iznajmljen() {
+		return is_iznajmljen;
+	}
+
+	public void setIs_iznajmljen(boolean is_iznajmljen) {
+		this.is_iznajmljen = is_iznajmljen;
+	}
+
+	public Auto(int auto_id, String marka, String model, int godiste, boolean is_iznajmljen) {
+		super();
+		this.auto_id = auto_id;
+		this.marka = marka;
+		this.model = model;
+		this.godiste = godiste;
+		this.is_iznajmljen = is_iznajmljen;
+	}
+
+	
+	
+	
+	
+	
 }
