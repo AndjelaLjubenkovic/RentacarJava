@@ -28,9 +28,8 @@ public class UserControllerTest {
     public void testRegister() {
         String username = "testuser";
         String password = "testpassword";
-        String email = "test@example.com";
 
-        userController.register(username, password, email);
+        userController.register(username, password);
 
         // Provera da li je korisnik uspešno dodat u bazu
         try {
