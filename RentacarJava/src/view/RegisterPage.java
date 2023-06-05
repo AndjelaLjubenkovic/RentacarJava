@@ -5,18 +5,23 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.UserController;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class RegisterPage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField usernameField;
-	private JTextField emailtField;
 	private JPasswordField passwordField;
+	private UserController userController;
 
 	/**
 	 * Launch the application.
@@ -51,12 +56,8 @@ public class RegisterPage extends JFrame {
 		lblUsername.setBounds(163, 15, 85, 16);
 		contentPane.add(lblUsername);
 		
-		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setBounds(163, 81, 61, 16);
-		contentPane.add(lblEmail);
-		
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(163, 145, 61, 16);
+		lblPassword.setBounds(163, 90, 61, 16);
 		contentPane.add(lblPassword);
 		
 		usernameField = new JTextField();
@@ -64,13 +65,8 @@ public class RegisterPage extends JFrame {
 		contentPane.add(usernameField);
 		usernameField.setColumns(10);
 		
-		emailtField = new JTextField();
-		emailtField.setBounds(55, 98, 347, 35);
-		contentPane.add(emailtField);
-		emailtField.setColumns(10);
-		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(55, 162, 347, 35);
+		passwordField.setBounds(55, 118, 347, 35);
 		contentPane.add(passwordField);
 		
 		JButton btnLogin = new JButton("Uloguj se");
@@ -78,11 +74,16 @@ public class RegisterPage extends JFrame {
 		contentPane.add(btnLogin);
 		
 		JButton btnRegister = new JButton("Registruj se");
-		btnRegister.setBounds(190, 196, 117, 29);
+		btnRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				userController.register(usernameField.getText(), passwordField.getText());
+			}
+		});
+		btnRegister.setBounds(190, 165, 117, 29);
 		contentPane.add(btnRegister);
 		
 		JLabel lblNewLabel_3 = new JLabel("Vec imas nalog?");
-		lblNewLabel_3.setBounds(55, 250, 139, 16);
+		lblNewLabel_3.setBounds(55, 242, 139, 16);
 		contentPane.add(lblNewLabel_3);
 	}
 

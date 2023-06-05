@@ -10,6 +10,8 @@ import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Main extends JFrame {
 
@@ -52,11 +54,23 @@ public class Main extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton btnLoginPage = new JButton("Uloguj se");
+		btnLoginPage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new LoginPage().setVisible(true);
+			}
+		});
 		btnLoginPage.setBackground(new Color(0, 128, 128));
 		btnLoginPage.setBounds(237, 115, 117, 29);
 		contentPane.add(btnLoginPage);
 		
 		JButton btnSignupPage = new JButton("Registruj se");
+		btnSignupPage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new RegisterPage().setVisible(true);
+			}
+		});
 		btnSignupPage.setBounds(66, 115, 117, 29);
 		contentPane.add(btnSignupPage);
 	}

@@ -28,7 +28,7 @@ public class UserController {
 	 * slusi za dodavanje novog korisnika u bazu i registraciju korisnika na sistem
 	 */
 	
-	  public void register(String username, String password, String email) {
+	  public void register(String username, String password) {
 	        try {
 	            // Priprema SQL upita
 	            String query = "INSERT INTO User (username, password) VALUES (?, ?)";
