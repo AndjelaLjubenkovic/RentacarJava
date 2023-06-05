@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import controller.AutoController;
-import konekcija.DatabaseConnection;
+import konekcija.DBConnection;
 import model.Auto;
 
 import java.util.List;
@@ -17,7 +17,7 @@ public class AutoControllerTest {
     @BeforeEach
     public void setUp() {
         autoController = new AutoController();
-        DatabaseConnection.getInstance().getConnection();
+        DBConnection.getInstance().getConnection();
     }
 
     /**

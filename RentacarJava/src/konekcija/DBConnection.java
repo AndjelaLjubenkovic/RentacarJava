@@ -1,14 +1,14 @@
 package konekcija;
 import java.sql.*;
 
-public class DatabaseConnection {
-	private static DatabaseConnection instance;
+public class DBConnection {
+	private static DBConnection instance;
     private Connection connection;
 /**
  * privatni konstruktor da bi se samo u klasi mogla instancirati ova klasa
  * 
  */
-    private DatabaseConnection() {
+    private DBConnection() {
         try {
             // Inicijalizacija konekcije s bazom podataka
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/rentacar", "root", "");
@@ -22,9 +22,9 @@ public class DatabaseConnection {
  * cilj je imati samo jednu konekciju na bazu podataka i uvek vracati istu
  * ovo je "singlton patern"
  */
-    public static DatabaseConnection getInstance() {
+    public static DBConnection getInstance() {
         if (instance == null) {
-            instance = new DatabaseConnection();
+            instance = new DBConnection();
         }
         return instance;
     }
@@ -34,17 +34,8 @@ public class DatabaseConnection {
     }
     
     /**
-     * ova metoda zatvara konekciju
+     * ova metoda proverava da li je zatvarena konekcija
      */
-    public void zatvoriKonekciju() {
-        try {
-            if (connection != null && !connection.isClosed()) {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
     
     public boolean isKonekcijaZatvorena() throws SQLException
     {

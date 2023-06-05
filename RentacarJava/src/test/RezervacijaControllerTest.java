@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import controller.RezervacijaController;
-import konekcija.DatabaseConnection;
+import konekcija.DBConnection;
 import model.Rezervacija;
 
 import static org.junit.Assert.assertFalse;
@@ -19,7 +19,7 @@ public class RezervacijaControllerTest {
     @BeforeEach
     public void setUp() {
         rezervacijaController = new RezervacijaController();
-        DatabaseConnection.getInstance().getConnection();
+        DBConnection.getInstance().getConnection();
     }
 
     /**

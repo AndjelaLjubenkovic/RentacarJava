@@ -21,7 +21,7 @@ public class RegisterPage extends JFrame {
 	private JPanel contentPane;
 	private JTextField usernameField;
 	private JPasswordField passwordField;
-	private UserController userController;
+	UserController userController = new UserController();
 
 	/**
 	 * Launch the application.
@@ -70,6 +70,12 @@ public class RegisterPage extends JFrame {
 		contentPane.add(passwordField);
 		
 		JButton btnLogin = new JButton("Uloguj se");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new LoginPage().setVisible(true);
+			}
+		});
 		btnLogin.setBounds(190, 237, 117, 29);
 		contentPane.add(btnLogin);
 		

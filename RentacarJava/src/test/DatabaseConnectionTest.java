@@ -2,7 +2,7 @@ package test;
 
 import org.xml.sax.InputSource;
 
-import konekcija.DatabaseConnection;
+import konekcija.DBConnection;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -36,7 +36,7 @@ public class DatabaseConnectionTest extends DBTestCase {
 	    System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_USERNAME, "root");
 	    System.setProperty(PropertiesBasedJdbcDatabaseTester.DBUNIT_PASSWORD, "");
 	    
-	    connection = DatabaseConnection.getInstance().getConnection();
+	    connection = DBConnection.getInstance().getConnection();
 	  }
 	/**
 	 *   
@@ -73,8 +73,8 @@ public class DatabaseConnectionTest extends DBTestCase {
 	  @Test
 	    public void testZatvoriKonekciju() throws SQLException {
 
-	    	((DatabaseConnection) connection).zatvoriKonekciju();
-	        assertTrue(((DatabaseConnection) connection).isKonekcijaZatvorena());
+		  connection.close();
+	        assertTrue(((DBConnection) connection).isKonekcijaZatvorena());
 	    }
 	
 }

@@ -1,7 +1,7 @@
 package test;
 
 import controller.UserController;
-import konekcija.DatabaseConnection;
+import konekcija.DBConnection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +18,7 @@ public class UserControllerTest {
     @BeforeEach
     public void setUp() {
         userController = new UserController();
-        connection = DatabaseConnection.getInstance().getConnection();
+        connection = DBConnection.getInstance().getConnection();
     }
 
     /**

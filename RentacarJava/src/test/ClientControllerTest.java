@@ -1,7 +1,7 @@
 package test;
 
 import controller.ClientController;
-import konekcija.DatabaseConnection;
+import konekcija.DBConnection;
 import model.Klijent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,7 @@ public class ClientControllerTest {
     @BeforeEach
     public void setUp() {
         clientController = new ClientController();
-        DatabaseConnection.getInstance().getConnection();
+        DBConnection.getInstance().getConnection();
     }
 
     /**

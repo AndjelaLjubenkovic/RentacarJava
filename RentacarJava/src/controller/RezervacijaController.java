@@ -4,14 +4,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import konekcija.DatabaseConnection;
+import konekcija.DBConnection;
 import model.Rezervacija;
 
 public class RezervacijaController {
     private Connection connection;
 
     public RezervacijaController() {
-        connection = DatabaseConnection.getInstance().getConnection();
+        connection = DBConnection.getInstance().getConnection();
     }
 /**
  * 
@@ -26,11 +26,12 @@ public class RezervacijaController {
             statement.setInt(2, rezervacija.getAuto_id());
 
             statement.executeUpdate();
+            connection.close();
             
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        ((DatabaseConnection) connection).zatvoriKonekciju();
+
     }
 
    /**
@@ -55,11 +56,12 @@ public class RezervacijaController {
                 rezervacija.setAuto_id(autoId);
                 rezervacije.add(rezervacija);
             }
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        ((DatabaseConnection) connection).zatvoriKonekciju();
+
         return rezervacije;
 
     }

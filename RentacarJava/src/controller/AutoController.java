@@ -5,13 +5,13 @@ import model.Auto;
 import java.util.ArrayList;
 import java.util.List;
 
-import konekcija.DatabaseConnection;
+import konekcija.DBConnection;
 
 public class AutoController {
     private Connection connection;
 
     public AutoController() {
-        connection = DatabaseConnection.getInstance().getConnection();
+        connection = DBConnection.getInstance().getConnection();
     }
 /**
  * 
@@ -28,7 +28,8 @@ public class AutoController {
             statement.setBoolean(4, auto.isIznajmljen());
 
             statement.executeUpdate();
-            ((DatabaseConnection) connection).zatvoriKonekciju();
+            connection.close();
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -59,7 +60,7 @@ public class AutoController {
                 auto.setGodiste(godiste);
                 auto.setIznajmljen(isIznajmljen);
 
-                ((DatabaseConnection) connection).zatvoriKonekciju();
+                connection.close();
                 return auto;
                 
             }
@@ -86,7 +87,8 @@ public class AutoController {
             statement.setInt(5, auto.getAuto_id());
 
             statement.executeUpdate();
-            ((DatabaseConnection) connection).zatvoriKonekciju();
+
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -101,7 +103,8 @@ public class AutoController {
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, autoId);
-            ((DatabaseConnection) connection).zatvoriKonekciju();
+
+            connection.close();
 
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -134,12 +137,12 @@ public class AutoController {
                 auto.setIznajmljen(isIznajmljen);
 
                 auti.add(auto);
+                connection.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        ((DatabaseConnection) connection).zatvoriKonekciju();
         return auti;
     }
     

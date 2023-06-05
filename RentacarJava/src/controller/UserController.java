@@ -2,7 +2,7 @@ package controller;
 
 import java.sql.*;
 
-import konekcija.DatabaseConnection;
+import konekcija.DBConnection;
 
 
 
@@ -16,7 +16,7 @@ public class UserController {
 	 */
 	
 	public UserController() {
-		connection = DatabaseConnection.getInstance().getConnection();
+		connection = DBConnection.getInstance().getConnection();
     }
 	
 
@@ -40,12 +40,12 @@ public class UserController {
 
 	            // Izvršavanje upita
 	            preparedStatement.executeUpdate();
+	            connection.close();
 
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
 	        
-	        ((DatabaseConnection) connection).zatvoriKonekciju();
 	    }
 /**
  * 
@@ -68,11 +68,10 @@ public class UserController {
 				ResultSet resultSet = preparedStatement.executeQuery()) {
 				}
 	            
-
+	            connection.close();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
-	        ((DatabaseConnection) connection).zatvoriKonekciju();
 
 	    }
 
