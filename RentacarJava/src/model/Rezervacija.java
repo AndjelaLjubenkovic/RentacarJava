@@ -5,10 +5,6 @@ public class Rezervacija {
 	private int klijent_id;
 	private int auto_id;
 
-	public Rezervacija() {
-	    // TODO - implement Rezervacija.Rezervacija
-	    throw new UnsupportedOperationException();
-	}
 
 	public int getRezervacija_id() {
 	    return rezervacija_id;
@@ -46,5 +42,23 @@ public class Rezervacija {
 	    this.auto_id = auto_id;
 	}
 
+	public Rezervacija(int rezervacija_id, int klijent_id, int auto_id) {
+		super();
+		this.rezervacija_id = rezervacija_id;
+		this.klijent_id = klijent_id;
+		this.auto_id = auto_id;
+	}
+
+	public Rezervacija(int klijent_id, int auto_id) {
+		super();
+		this.klijent_id = klijent_id;
+		this.auto_id = auto_id;
+	}
+
+	public Rezervacija() {
+		super();
+	}
+
+	
 
 }
