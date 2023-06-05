@@ -80,8 +80,28 @@ public class Klijent {
 	    this.user_id = user_id;
 	}
 
-	public Klijent() {
-	    // TODO - implement Klijent.Klijent
-	    throw new UnsupportedOperationException();
+	public Klijent(int klijent_id, String ime, String prezime, String broj_telefona, String broj_vozacke, int user_id) {
+		super();
+		this.klijent_id = klijent_id;
+		this.ime = ime;
+		this.prezime = prezime;
+		this.broj_telefona = broj_telefona;
+		this.broj_vozacke = broj_vozacke;
+		this.user_id = user_id;
 	}
+
+	public Klijent(String ime, String prezime, String broj_telefona, String broj_vozacke, int user_id) {
+		super();
+		this.ime = ime;
+		this.prezime = prezime;
+		this.broj_telefona = broj_telefona;
+		this.broj_vozacke = broj_vozacke;
+		this.user_id = user_id;
+	}
+
+	public Klijent() {
+		super();
+	}
+
+	
 }

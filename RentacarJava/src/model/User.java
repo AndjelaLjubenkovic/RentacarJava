@@ -41,9 +41,22 @@ public class User {
 	    this.password = password;
 	}
 
-	public User() {
-	    // TODO - implement User.User
-	    throw new UnsupportedOperationException();
+	public User(int user_id, String username, String password) {
+		super();
+		this.user_id = user_id;
+		this.username = username;
+		this.password = password;
 	}
 
+	public User(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
+
+	public User() {
+		super();
+	}
+
+	
 }
