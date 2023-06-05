@@ -31,13 +31,12 @@ public class UserController {
 	  public void register(String username, String password, String email) {
 	        try {
 	            // Priprema SQL upita
-	            String query = "INSERT INTO User (username, password, email) VALUES (?, ?, ?)";
+	            String query = "INSERT INTO User (username, password) VALUES (?, ?)";
 	            PreparedStatement preparedStatement = connection.prepareStatement(query);
 
 	            // Postavljanje parametara upita
 	            preparedStatement.setString(1, username);
 	            preparedStatement.setString(2, password);
-	            preparedStatement.setString(3, email);
 
 	            // Izvršavanje upita
 	            preparedStatement.executeUpdate();
