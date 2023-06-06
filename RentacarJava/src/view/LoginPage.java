@@ -1,13 +1,10 @@
 package view;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.UserController;
-import konekcija.DBConnection;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,6 +25,7 @@ public class LoginPage extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
