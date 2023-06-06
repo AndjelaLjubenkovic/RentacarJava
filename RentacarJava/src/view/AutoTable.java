@@ -10,13 +10,13 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
+
 public class AutoTable extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JScrollPane scrollPane;
-	private JTable autoTable;
-	
+	private JTable autoTable;	
 	
 
 	/**
@@ -70,6 +70,7 @@ public class AutoTable extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 		
 		AutoTableModel atm = new AutoTableModel();
+		atm.osveziPodatke();
 		autoTable.setModel(atm);
 	}
 }

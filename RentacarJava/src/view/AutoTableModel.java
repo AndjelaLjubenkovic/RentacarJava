@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import model.Auto;
 import javax.swing.table.AbstractTableModel;
 
+import controller.AutoController;
+
 public class AutoTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
 	private String kolone[] = {"Marka", "Model", "Godiste", "Iznajmljen"};
 	private ArrayList<Auto> listaAuto = new ArrayList<>();
-	
-	
-	
 	@Override
 	public int getRowCount() {
 		return listaAuto.size();
@@ -37,5 +36,11 @@ public class AutoTableModel extends AbstractTableModel {
 	@Override
 	public String getColumnName(int column) {
 		return kolone[column];
+	}
+	
+	public void osveziPodatke() {
+	    AutoController autoController = new AutoController();
+	    listaAuto = autoController.dobaviSveAute();
+	    fireTableDataChanged();
 	}
 }

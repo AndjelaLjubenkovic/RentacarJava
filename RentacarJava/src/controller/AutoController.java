@@ -3,149 +3,222 @@ package controller;
 import java.sql.*;
 import model.Auto;
 import java.util.ArrayList;
-import java.util.List;
 
 import konekcija.DBConnection;
 
 public class AutoController {
-    private Connection connection;
+	private Connection connection;
 
-    public AutoController() {
-        connection = DBConnection.getInstance().getConnection();
-    }
-/**
- * 
- * @param auto
- * ova metoda dodaje novi auto
- */
-    public void dodajAuto(Auto auto) {
-        String query = "INSERT INTO Auto (marka, model, godiste, is_iznajmljen) VALUES (?, ?, ?, ?)";
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, auto.getMarka());
-            statement.setString(2, auto.getModel());
-            statement.setInt(3, auto.getGodiste());
-            statement.setBoolean(4, auto.isIznajmljen());
+	public AutoController() {
+		try {
+			connection = DBConnection.getInstance().getConnection();
+			if(connection.isClosed() == true) {
+			//connection = DBConnection.getInstance().getConnection();
+			System.out.println("Otvorio sam konekciju");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		/*DBConnection dbConnection = DBConnection.getInstance();
+	    try {
+			if (dbConnection.isKonekcijaZatvorena()) {
+			    connection = dbConnection.getConnection();
+			} else {
+			    System.out.println("Veza sa bazom podataka nije uspostavljena ili je zatvorena.");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+	}
 
-            statement.executeUpdate();
-            connection.close();
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    /**
-     * 
-     * @param autoId
-     * @return vraca jedan auto po id
-     */
-    public Auto dobaviAuto(int autoId) {
-        String query = "SELECT * FROM Auto WHERE auto_id = ?";
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, autoId);
+	/**
+	 * 
+	 * @param auto ova metoda dodaje novi auto
+	 */
+	public void dodajAuto(Auto auto) {
+		String query = "INSERT INTO Auto (marka, model, godiste, is_iznajmljen) VALUES (?, ?, ?, ?)";
+		try {
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, auto.getMarka());
+			statement.setString(2, auto.getModel());
+			statement.setInt(3, auto.getGodiste());
+			statement.setBoolean(4, auto.isIznajmljen());
 
-            ResultSet resultSet = statement.executeQuery();
+			statement.executeUpdate();
+			connection.close();
 
-            if (resultSet.next()) {
-                String marka = resultSet.getString("marka");
-                String model = resultSet.getString("model");
-                int godiste = resultSet.getInt("godiste");
-                boolean isIznajmljen = resultSet.getBoolean("is_iznajmljen");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
-                Auto auto = new Auto();
-                auto.setAuto_id(autoId);
-                auto.setMarka(marka);
-                auto.setModel(model);
-                auto.setGodiste(godiste);
-                auto.setIznajmljen(isIznajmljen);
+	/**
+	 * 
+	 * @param autoId
+	 * @return vraca jedan auto po id
+	 */
+	public Auto dobaviAuto(int autoId) {
+		String query = "SELECT * FROM Auto WHERE auto_id = ?";
+		try {
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setInt(1, autoId);
 
-                connection.close();
-                return auto;
-                
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+			ResultSet resultSet = statement.executeQuery();
 
-        return null; // Vraćamo null ako auto nije pronađen
-    }
-   
-/**
- * 
- * @param auto
- * ova metoda azurira novi auto
- */
-    public void azurirajAuto(Auto auto) {
-        String query = "UPDATE Auto SET marka=?, model=?, godiste=?, is_iznajmljen=? WHERE auto_id=?";
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, auto.getMarka());
-            statement.setString(2, auto.getModel());
-            statement.setInt(3, auto.getGodiste());
-            statement.setBoolean(4, auto.isIznajmljen());
-            statement.setInt(5, auto.getAuto_id());
+			if (resultSet.next()) {
+				String marka = resultSet.getString("marka");
+				String model = resultSet.getString("model");
+				int godiste = resultSet.getInt("godiste");
+				boolean isIznajmljen = resultSet.getBoolean("is_iznajmljen");
 
-            statement.executeUpdate();
+				Auto auto = new Auto();
+				auto.setAuto_id(autoId);
+				auto.setMarka(marka);
+				auto.setModel(model);
+				auto.setGodiste(godiste);
+				auto.setIznajmljen(isIznajmljen);
 
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-/**
- * 
- * @param autoId
- * ova metoda brise auto
- */
-    public void obrisiAuto(int autoId) {
-        String query = "DELETE FROM Auto WHERE auto_id=?";
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(1, autoId);
+				connection.close();
+				return auto;
 
-            connection.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-/**
- * 
- * @return ova metoda vraca sve automobile
- */
-    public List<Auto> dobaviSveAute() {
-        List<Auto> auti = new ArrayList<>();
-        String query = "SELECT * FROM Auto";
-        try {
-            PreparedStatement statement = connection.prepareStatement(query);
-            ResultSet resultSet = statement.executeQuery();
+		return null; // Vraćamo null ako auto nije pronađen
+	}
 
-            while (resultSet.next()) {
-                int autoId = resultSet.getInt("auto_id");
-                String marka = resultSet.getString("marka");
-                String model = resultSet.getString("model");
-                int godiste = resultSet.getInt("godiste");
-                boolean isIznajmljen = resultSet.getBoolean("is_iznajmljen");
+	/**
+	 * 
+	 * @param auto ova metoda azurira novi auto
+	 */
+	public void azurirajAuto(Auto auto) {
+		String query = "UPDATE Auto SET marka=?, model=?, godiste=?, is_iznajmljen=? WHERE auto_id=?";
+		try {
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setString(1, auto.getMarka());
+			statement.setString(2, auto.getModel());
+			statement.setInt(3, auto.getGodiste());
+			statement.setBoolean(4, auto.isIznajmljen());
+			statement.setInt(5, auto.getAuto_id());
 
-                Auto auto = new Auto();
-                auto.setAuto_id(autoId);
-                auto.setMarka(marka);
-                auto.setModel(model);
-                auto.setGodiste(godiste);
-                auto.setIznajmljen(isIznajmljen);
+			statement.executeUpdate();
 
-                auti.add(auto);
-                connection.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
-        return auti;
-    }
-    
-    
-   
+	/**
+	 * 
+	 * @param autoId ova metoda brise auto
+	 */
+	public void obrisiAuto(int autoId) {
+		String query = "DELETE FROM Auto WHERE auto_id=?";
+		try {
+			PreparedStatement statement = connection.prepareStatement(query);
+			statement.setInt(1, autoId);
+
+			connection.close();
+
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 
+	 * @return ova metoda vraca sve automobile
+	 */
+	/*
+	 * public ArrayList<Auto> dobaviSveAute() { ArrayList<Auto> auti = new
+	 * ArrayList<>(); String query = "SELECT * FROM Auto"; try { PreparedStatement
+	 * statement = connection.prepareStatement(query); ResultSet resultSet =
+	 * statement.executeQuery();
+	 * 
+	 * while (resultSet.next()) { int autoId = resultSet.getInt("auto_id"); String
+	 * marka = resultSet.getString("marka"); String model =
+	 * resultSet.getString("model"); int godiste = resultSet.getInt("godiste");
+	 * boolean isIznajmljen = resultSet.getBoolean("is_iznajmljen");
+	 * 
+	 * Auto auto = new Auto(); auto.setAuto_id(autoId); auto.setMarka(marka);
+	 * auto.setModel(model); auto.setGodiste(godiste);
+	 * auto.setIznajmljen(isIznajmljen);
+	 * 
+	 * auti.add(auto);
+	 * 
+	 * } } catch (SQLException e) { e.printStackTrace(); } try { connection.close();
+	 * } catch (SQLException e) {
+	 * 
+	 * e.printStackTrace(); } return auti; }
+	 */
+
+	/*
+	 * public ArrayList<Auto> dobaviSveAute() { ArrayList<Auto> auti = new
+	 * ArrayList<>();
+	 * 
+	 * String query = "SELECT * FROM Auto"; try { PreparedStatement statement =
+	 * connection.prepareStatement(query); ResultSet resultSet =
+	 * statement.executeQuery();
+	 * 
+	 * while (resultSet.next()) { int autoId = resultSet.getInt("auto_id"); String
+	 * marka = resultSet.getString("marka"); String model =
+	 * resultSet.getString("model"); int godiste = resultSet.getInt("godiste");
+	 * boolean isIznajmljen = resultSet.getBoolean("is_iznajmljen");
+	 * 
+	 * Auto auto = new Auto(); auto.setAuto_id(autoId); auto.setMarka(marka);
+	 * auto.setModel(model); auto.setGodiste(godiste);
+	 * auto.setIznajmljen(isIznajmljen);
+	 * 
+	 * auti.add(auto); } } catch (SQLException e) { e.printStackTrace(); } finally {
+	 * try { connection.close(); } catch (SQLException e) { e.printStackTrace(); } }
+	 * return auti; }
+	 */
+	public ArrayList<Auto> dobaviSveAute() {
+		ArrayList<Auto> auti = new ArrayList<>();
+		connection = DBConnection.getInstance().getConnection();
+		try {
+			if (connection != null && !connection.isClosed()) {
+				
+			String query = "SELECT * FROM Auto";
+
+				PreparedStatement statement = connection.prepareStatement(query);
+				ResultSet resultSet = statement.executeQuery();
+
+				while (resultSet.next()) {
+					int autoId = resultSet.getInt("auto_id");
+					String marka = resultSet.getString("marka");
+					String model = resultSet.getString("model");
+					int godiste = resultSet.getInt("godiste");
+					boolean isIznajmljen = resultSet.getBoolean("is_iznajmljen");
+
+					Auto auto = new Auto();
+					auto.setAuto_id(autoId);
+					auto.setMarka(marka);
+					auto.setModel(model);
+					auto.setGodiste(godiste);
+					auto.setIznajmljen(isIznajmljen);
+
+					auti.add(auto);
+				}
+				resultSet.close();
+				statement.close();
+				connection.close();
+			} else {
+				System.out.println("Veza sa bazom podataka nije uspostavljena ili je zatvorena.");
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return auti;
+	}
+
 }
