@@ -10,6 +10,7 @@ import controller.UserController;
 import konekcija.DBConnection;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -73,9 +74,13 @@ public class LoginPage extends JFrame {
 		JButton btnLogin = new JButton("Uloguj se");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				userController.login(usernameField.getText(), passwordField.getText());
+				String u = usernameField.getText();
+				String p = passwordField.getText();
+				if(userController.login(u, p) == true) {
 				dispose();
 				new AutoTable().setVisible(true);
+			}else{
+				JOptionPane.showMessageDialog(null, "Username or Password mismatch ");}
 			}
 		});
 		btnLogin.setBounds(215, 143, 117, 29);

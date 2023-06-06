@@ -6,7 +6,6 @@ public class Klijent {
 	private String prezime;
 	private String broj_telefona;
 	private String broj_vozacke;
-	private int user_id;
 
 	public int getKlijent_id() {
 	    return klijent_id;
@@ -68,35 +67,21 @@ public class Klijent {
 	    this.broj_vozacke = broj_vozacke;
 	}
 
-	public int getUser_id() {
-	    return user_id;
-	}
-
-	/**
-	 * 
-	 * @param user_id
-	 */
-	public void setUser_id(int user_id) {
-	    this.user_id = user_id;
-	}
-
-	public Klijent(int klijent_id, String ime, String prezime, String broj_telefona, String broj_vozacke, int user_id) {
+	public Klijent(int klijent_id, String ime, String prezime, String broj_telefona, String broj_vozacke) {
 		super();
 		this.klijent_id = klijent_id;
 		this.ime = ime;
 		this.prezime = prezime;
 		this.broj_telefona = broj_telefona;
 		this.broj_vozacke = broj_vozacke;
-		this.user_id = user_id;
 	}
 
-	public Klijent(String ime, String prezime, String broj_telefona, String broj_vozacke, int user_id) {
+	public Klijent(String ime, String prezime, String broj_telefona, String broj_vozacke) {
 		super();
 		this.ime = ime;
 		this.prezime = prezime;
 		this.broj_telefona = broj_telefona;
 		this.broj_vozacke = broj_vozacke;
-		this.user_id = user_id;
 	}
 
 	public Klijent() {

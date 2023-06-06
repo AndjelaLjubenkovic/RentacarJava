@@ -29,7 +29,6 @@ public class ClientControllerTest {
         klijent.setPrezime("Markovic");
         klijent.setBroj_telefona("123456789");
         klijent.setBroj_vozacke("ABC123");
-        klijent.setUser_id(1);
 
         clientController.createClient(klijent);
 
@@ -77,7 +76,6 @@ public class ClientControllerTest {
         klijent.setPrezime("Novo prezime");
         klijent.setBroj_telefona("987654321");
         klijent.setBroj_vozacke("XYZ789");
-        klijent.setUser_id(2);
 
         clientController.updateClient(klijent);
 

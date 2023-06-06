@@ -25,7 +25,7 @@ public class ClientController {
     public void createClient(Klijent client) {
         try {
             // Priprema SQL upita
-            String query = "INSERT INTO Klijent (ime, prezime, br_telefona, broj_vozacka, user_id) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO Klijent (ime, prezime, broj_telefona, broj_vozacke) VALUES (?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
             // Postavljanje parametara upita
@@ -33,7 +33,6 @@ public class ClientController {
             preparedStatement.setString(2, client.getPrezime());
             preparedStatement.setString(3, client.getBroj_telefona());
             preparedStatement.setString(4, client.getBroj_vozacke());
-            preparedStatement.setInt(5, client.getUser_id());
 
             // Izvršavanje upita
             preparedStatement.executeUpdate();
@@ -41,11 +40,6 @@ public class ClientController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        try {
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
     }
 
     /**
@@ -72,7 +66,6 @@ public class ClientController {
                 client.setPrezime(resultSet.getString("prezime"));
                 client.setBroj_telefona(resultSet.getString("broj_telefona"));
                 client.setBroj_vozacke(resultSet.getString("broj_vozacke"));
-                client.setUser_id(resultSet.getInt("user_id"));
 
                 clients.add(client);
             }
@@ -114,7 +107,7 @@ public class ClientController {
                 client.setPrezime(resultSet.getString("prezime"));
                 client.setBroj_telefona(resultSet.getString("broj_telefona"));
                 client.setBroj_vozacke(resultSet.getString("broj_vozacke"));
-                client.setUser_id(resultSet.getInt("user_id"));
+
                 return client;         
             }
             
@@ -137,13 +130,12 @@ public class ClientController {
      * sluzi za azuriranje postojeceg klijenta
      */
     public void updateClient(Klijent updatedClient) {
-        String sql = "UPDATE Klijent SET ime=?, prezime=?, broj_telefona=?, broj_vozacke=?,user_id=? WHERE klijent_id=?";
+        String sql = "UPDATE Klijent SET ime=?, prezime=?, broj_telefona=?, broj_vozacke=? WHERE klijent_id=?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, updatedClient.getIme());
             statement.setString(2, updatedClient.getPrezime());
             statement.setString(3, updatedClient.getBroj_telefona());
             statement.setString(4, updatedClient.getBroj_vozacke());
-            statement.setInt(5, updatedClient.getUser_id());
             statement.setInt(6, updatedClient.getKlijent_id());
             statement.executeUpdate();
             

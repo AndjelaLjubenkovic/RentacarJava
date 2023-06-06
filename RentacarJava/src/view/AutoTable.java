@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Button;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,16 +7,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.CompoundBorder;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableColumnModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
-import javax.swing.DefaultButtonModel;
-import javax.swing.DefaultCellEditor;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 
 public class AutoTable extends JFrame {
@@ -26,6 +21,7 @@ public class AutoTable extends JFrame {
 	private JPanel contentPane;
 	private JScrollPane scrollPane;
 	private JTable autoTable;	
+	private JButton btnKlijent;
 	
 
 	/**
@@ -58,20 +54,45 @@ public class AutoTable extends JFrame {
 		setContentPane(contentPane);
 		
 		scrollPane = new JScrollPane();
+		
+		JButton btnIznajmi = new JButton("Iznajmi");
+		btnIznajmi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//dispose();
+				//new RentPage().setVisible(true);
+			}
+		});
+		
+		btnKlijent = new JButton("Popuni podatke");
+		btnKlijent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new KlijentPage().setVisible(true);
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(25)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 386, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(39, Short.MAX_VALUE))
-	);
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(btnKlijent)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnIznajmi))
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 397, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(28, Short.MAX_VALUE))
+		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 200, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(66, Short.MAX_VALUE))
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnIznajmi)
+						.addComponent(btnKlijent))
+					.addContainerGap(13, Short.MAX_VALUE))
 		);
 		
 		autoTable = new JTable();

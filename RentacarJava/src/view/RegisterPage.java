@@ -53,20 +53,20 @@ public class RegisterPage extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblUsername = new JLabel("Username");
-		lblUsername.setBounds(163, 15, 85, 16);
+		lblUsername.setBounds(18, 25, 85, 16);
 		contentPane.add(lblUsername);
 		
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(163, 90, 61, 16);
+		lblPassword.setBounds(18, 88, 61, 16);
 		contentPane.add(lblPassword);
 		
 		usernameField = new JTextField();
-		usernameField.setBounds(55, 43, 347, 35);
+		usernameField.setBounds(103, 16, 318, 35);
 		contentPane.add(usernameField);
 		usernameField.setColumns(10);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(55, 118, 347, 35);
+		passwordField.setBounds(103, 79, 318, 35);
 		contentPane.add(passwordField);
 		
 		JButton btnLogin = new JButton("Uloguj se");
@@ -76,7 +76,7 @@ public class RegisterPage extends JFrame {
 				new LoginPage().setVisible(true);
 			}
 		});
-		btnLogin.setBounds(190, 237, 117, 29);
+		btnLogin.setBounds(304, 237, 117, 29);
 		contentPane.add(btnLogin);
 		
 		JButton btnRegister = new JButton("Registruj se");
@@ -87,11 +87,11 @@ public class RegisterPage extends JFrame {
 				new AutoTable().setVisible(true);
 			}
 		});
-		btnRegister.setBounds(190, 165, 117, 29);
+		btnRegister.setBounds(304, 137, 117, 29);
 		contentPane.add(btnRegister);
 		
 		JLabel lblNewLabel_3 = new JLabel("Vec imas nalog?");
-		lblNewLabel_3.setBounds(55, 242, 139, 16);
+		lblNewLabel_3.setBounds(167, 242, 139, 16);
 		contentPane.add(lblNewLabel_3);
 	}
 
