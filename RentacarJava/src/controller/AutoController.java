@@ -10,27 +10,8 @@ public class AutoController {
 	private Connection connection;
 
 	public AutoController() {
-		try {
-			connection = DBConnection.getInstance().getConnection();
-			if(connection.isClosed() == true) {
-			//connection = DBConnection.getInstance().getConnection();
-			System.out.println("Otvorio sam konekciju");
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		/*DBConnection dbConnection = DBConnection.getInstance();
-	    try {
-			if (dbConnection.isKonekcijaZatvorena()) {
-			    connection = dbConnection.getConnection();
-			} else {
-			    System.out.println("Veza sa bazom podataka nije uspostavljena ili je zatvorena.");
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+
+		connection = DBConnection.getInstance().getConnection();
 	}
 
 	/**
@@ -47,9 +28,14 @@ public class AutoController {
 			statement.setBoolean(4, auto.isIznajmljen());
 
 			statement.executeUpdate();
-			connection.close();
 
 		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -80,10 +66,13 @@ public class AutoController {
 				auto.setGodiste(godiste);
 				auto.setIznajmljen(isIznajmljen);
 
-				connection.close();
 				return auto;
-
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -107,8 +96,13 @@ public class AutoController {
 
 			statement.executeUpdate();
 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
 			connection.close();
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -122,11 +116,15 @@ public class AutoController {
 		try {
 			PreparedStatement statement = connection.prepareStatement(query);
 			statement.setInt(1, autoId);
-
-			connection.close();
-
 			statement.executeUpdate();
+
 		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -135,90 +133,39 @@ public class AutoController {
 	 * 
 	 * @return ova metoda vraca sve automobile
 	 */
-	/*
-	 * public ArrayList<Auto> dobaviSveAute() { ArrayList<Auto> auti = new
-	 * ArrayList<>(); String query = "SELECT * FROM Auto"; try { PreparedStatement
-	 * statement = connection.prepareStatement(query); ResultSet resultSet =
-	 * statement.executeQuery();
-	 * 
-	 * while (resultSet.next()) { int autoId = resultSet.getInt("auto_id"); String
-	 * marka = resultSet.getString("marka"); String model =
-	 * resultSet.getString("model"); int godiste = resultSet.getInt("godiste");
-	 * boolean isIznajmljen = resultSet.getBoolean("is_iznajmljen");
-	 * 
-	 * Auto auto = new Auto(); auto.setAuto_id(autoId); auto.setMarka(marka);
-	 * auto.setModel(model); auto.setGodiste(godiste);
-	 * auto.setIznajmljen(isIznajmljen);
-	 * 
-	 * auti.add(auto);
-	 * 
-	 * } } catch (SQLException e) { e.printStackTrace(); } try { connection.close();
-	 * } catch (SQLException e) {
-	 * 
-	 * e.printStackTrace(); } return auti; }
-	 */
 
-	/*
-	 * public ArrayList<Auto> dobaviSveAute() { ArrayList<Auto> auti = new
-	 * ArrayList<>();
-	 * 
-	 * String query = "SELECT * FROM Auto"; try { PreparedStatement statement =
-	 * connection.prepareStatement(query); ResultSet resultSet =
-	 * statement.executeQuery();
-	 * 
-	 * while (resultSet.next()) { int autoId = resultSet.getInt("auto_id"); String
-	 * marka = resultSet.getString("marka"); String model =
-	 * resultSet.getString("model"); int godiste = resultSet.getInt("godiste");
-	 * boolean isIznajmljen = resultSet.getBoolean("is_iznajmljen");
-	 * 
-	 * Auto auto = new Auto(); auto.setAuto_id(autoId); auto.setMarka(marka);
-	 * auto.setModel(model); auto.setGodiste(godiste);
-	 * auto.setIznajmljen(isIznajmljen);
-	 * 
-	 * auti.add(auto); } } catch (SQLException e) { e.printStackTrace(); } finally {
-	 * try { connection.close(); } catch (SQLException e) { e.printStackTrace(); } }
-	 * return auti; }
-	 */
 	public ArrayList<Auto> dobaviSveAute() {
 		ArrayList<Auto> auti = new ArrayList<>();
-		connection = DBConnection.getInstance().getConnection();
+		String query = "SELECT * FROM Auto";
 		try {
-			if (connection != null && !connection.isClosed()) {
-				
-			String query = "SELECT * FROM Auto";
+			PreparedStatement statement = connection.prepareStatement(query);
+			ResultSet resultSet = statement.executeQuery();
 
-				PreparedStatement statement = connection.prepareStatement(query);
-				ResultSet resultSet = statement.executeQuery();
+			while (resultSet.next()) {
+				int autoId = resultSet.getInt("auto_id");
+				String marka = resultSet.getString("marka");
+				String model = resultSet.getString("model");
+				int godiste = resultSet.getInt("godiste");
+				boolean isIznajmljen = resultSet.getBoolean("is_iznajmljen");
 
-				while (resultSet.next()) {
-					int autoId = resultSet.getInt("auto_id");
-					String marka = resultSet.getString("marka");
-					String model = resultSet.getString("model");
-					int godiste = resultSet.getInt("godiste");
-					boolean isIznajmljen = resultSet.getBoolean("is_iznajmljen");
+				Auto auto = new Auto();
+				auto.setAuto_id(autoId);
+				auto.setMarka(marka);
+				auto.setModel(model);
+				auto.setGodiste(godiste);
+				auto.setIznajmljen(isIznajmljen);
 
-					Auto auto = new Auto();
-					auto.setAuto_id(autoId);
-					auto.setMarka(marka);
-					auto.setModel(model);
-					auto.setGodiste(godiste);
-					auto.setIznajmljen(isIznajmljen);
+				auti.add(auto);
 
-					auti.add(auto);
-				}
-				resultSet.close();
-				statement.close();
-				connection.close();
-			} else {
-				System.out.println("Veza sa bazom podataka nije uspostavljena ili je zatvorena.");
-				
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return auti;
 	}
-
 }

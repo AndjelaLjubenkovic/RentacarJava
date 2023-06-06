@@ -33,6 +33,17 @@ public class DBConnection {
         return connection;
     }
     
+    public void zatvoriKonekciju() {
+        try {
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    
     /**
      * ova metoda proverava da li je zatvarena konekcija
      */

@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.UserController;
+import konekcija.DBConnection;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;

@@ -26,11 +26,15 @@ public class RezervacijaController {
             statement.setInt(2, rezervacija.getAuto_id());
 
             statement.executeUpdate();
-            connection.close();
             
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
     }
 
@@ -56,11 +60,14 @@ public class RezervacijaController {
                 rezervacija.setAuto_id(autoId);
                 rezervacije.add(rezervacija);
             }
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
         return rezervacije;
 

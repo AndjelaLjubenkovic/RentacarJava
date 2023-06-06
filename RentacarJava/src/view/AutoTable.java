@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Button;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -7,8 +8,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.CompoundBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+import javax.swing.DefaultButtonModel;
+import javax.swing.DefaultCellEditor;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
 
 
 public class AutoTable extends JFrame {
@@ -72,5 +81,6 @@ public class AutoTable extends JFrame {
 		AutoTableModel atm = new AutoTableModel();
 		atm.osveziPodatke();
 		autoTable.setModel(atm);
+		
 	}
 }

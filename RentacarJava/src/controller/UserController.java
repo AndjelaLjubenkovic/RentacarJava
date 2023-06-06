@@ -40,11 +40,15 @@ public class UserController {
 
 	            // Izvršavanje upita
 	            preparedStatement.executeUpdate();
-	            connection.close();
 
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
+	        try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 	        
 	    }
 /**
@@ -68,10 +72,14 @@ public class UserController {
 				ResultSet resultSet = preparedStatement.executeQuery()) {
 				}
 	            
-	            connection.close();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
+	        try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 
 	    }
 
