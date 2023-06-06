@@ -83,6 +83,8 @@ public class RegisterPage extends JFrame {
 		btnRegister.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				userController.register(usernameField.getText(), passwordField.getText());
+				dispose();
+				new AutoTable().setVisible(true);
 			}
 		});
 		btnRegister.setBounds(190, 165, 117, 29);

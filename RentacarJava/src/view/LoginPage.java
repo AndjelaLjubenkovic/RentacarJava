@@ -5,10 +5,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.UserController;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class LoginPage extends JFrame {
 
@@ -16,6 +21,7 @@ public class LoginPage extends JFrame {
 	private JPanel contentPane;
 	private JTextField usernameField;
 	private JPasswordField passwordField;
+	UserController userController = new UserController();
 
 	/**
 	 * Launch the application.
@@ -64,6 +70,13 @@ public class LoginPage extends JFrame {
 		contentPane.add(passwordField);
 		
 		JButton btnLogin = new JButton("Uloguj se");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				userController.login(usernameField.getText(), passwordField.getText());
+				dispose();
+				new AutoTable().setVisible(true);
+			}
+		});
 		btnLogin.setBounds(215, 143, 117, 29);
 		contentPane.add(btnLogin);
 		
@@ -72,6 +85,12 @@ public class LoginPage extends JFrame {
 		contentPane.add(lblRegister);
 		
 		JButton btnRegister = new JButton("Registruj se");
+		btnRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				new RegisterPage().setVisible(true);
+			}
+		});
 		btnRegister.setBounds(215, 213, 117, 29);
 		contentPane.add(btnRegister);
 	}
