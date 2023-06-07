@@ -31,8 +31,11 @@ Da biste pokrenuli testove:
 * Izvršite test klase koje se nalaze u test direktorijumu.
 
 ## Dalji razvoj 
+Za dalji razvoj aplikacije planiran je razvoj admin panela putem kojeg će admin imati mogućnosti:
+* Krweiranje auta
+* 
 ## Autori
 Aplikacija je razvijena od strane:
 - Dušan Glišić [@DusanSistem](https://github.com/DusanSistem)
-- Andjela Ljubenković [@](https://github.com/janesmith)
+- Andjela Ljubenković [@Andjelaljubenkovic](https://github.com/AndjelaLjubenkovic)
 - Mark Johnson [@markjohnson](https://github.com/markjohnson)
