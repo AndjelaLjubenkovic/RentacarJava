@@ -12,9 +12,17 @@ public class AutoTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
 	private String kolone[] = { "Marka", "Model", "Godiste", "Iznajmljen" };
+	public AutoController ac = new AutoController();
 	private ArrayList<Auto> listaAuto = new ArrayList<>();
 
-	public AutoController ac;
+	/*
+	public ArrayList<Auto> getAutomobili() {
+		for (Auto auto : listaAuto) {
+			listaAuto.add(auto);
+		}
+		return listaAuto;
+	}
+	*/
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
@@ -68,8 +76,21 @@ public class AutoTableModel extends AbstractTableModel {
 	public void osveziPodatke() {
 		ac = new AutoController();
 		listaAuto = ac.dobaviSveAute();
-		// DBConnection.getInstance().zatvoriKonekciju();
 		fireTableDataChanged();
+	}
+
+	public ArrayList<Auto> getDostupniAutomobili() {
+
+		ArrayList<Auto> dostupniAutomobili = new ArrayList<>();
+		
+		listaAuto = ac.dobaviSveAute();
+		
+		for (Auto auto : listaAuto) {
+			if (!auto.isIznajmljen()) {
+				dostupniAutomobili.add(auto);
+			}
+		}
+		return dostupniAutomobili;
 	}
 
 }

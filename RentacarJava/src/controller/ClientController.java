@@ -22,11 +22,14 @@ public class ClientController {
      * Sluzi za kreiranje novog klijenta
      * @param client
      */
-    public void createClient(Klijent client) {
+    
+    public int createClient(Klijent client) {
+        int created_klijent_id = 0;
+
         try {
             // Priprema SQL upita
             String query = "INSERT INTO Klijent (ime, prezime, broj_telefona, broj_vozacke) VALUES (?, ?, ?, ?)";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             // Postavljanje parametara upita
             preparedStatement.setString(1, client.getIme());
@@ -37,10 +40,19 @@ public class ClientController {
             // Izvršavanje upita
             preparedStatement.executeUpdate();
 
+            // Dobijanje generisanog klijent_id
+            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                created_klijent_id = generatedKeys.getInt(1);
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        return created_klijent_id;
     }
+
 
     /**
      * 

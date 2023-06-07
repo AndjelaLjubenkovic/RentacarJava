@@ -23,7 +23,7 @@ public class ClientControllerTest {
      * Metoda koja proverava da li je klijent uspešno dodat u bazu
      */
     @Test
-    public void testCreateClient() {
+    public int testCreateClient() {
         Klijent klijent = new Klijent();
         klijent.setIme("Marko");
         klijent.setPrezime("Markovic");
@@ -34,6 +34,8 @@ public class ClientControllerTest {
 
         List<Klijent> klijenti = clientController.getAllClients();
         assertTrue(klijenti.contains(klijent));
+        
+        return klijent.getKlijent_id();
     }
 
     /**

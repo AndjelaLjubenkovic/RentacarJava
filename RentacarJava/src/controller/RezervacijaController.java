@@ -5,10 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import konekcija.DBConnection;
+import model.Auto;
 import model.Rezervacija;
+
 
 public class RezervacijaController {
     private Connection connection;
+    private AutoController autoController = new AutoController();
 
     public RezervacijaController() {
         connection = DBConnection.getInstance().getConnection();
@@ -27,14 +30,17 @@ public class RezervacijaController {
 
             statement.executeUpdate();
             
+            Auto auto = autoController.dobaviAuto(rezervacija.getAuto_id());
+
+            // Postavite vrednost polja iznajmljen na true
+            if (auto != null) {
+                auto.setIznajmljen(true);
+                autoController.azurirajAuto(auto); // Ažurirajte automobil u bazi podataka
+            }
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        try {
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 
     }
 

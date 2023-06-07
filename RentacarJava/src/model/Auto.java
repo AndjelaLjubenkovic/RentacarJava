@@ -89,6 +89,12 @@ public class Auto {
 	public Auto() {
 		super();
 	}
+
+	@Override
+	public String toString() {
+		return "Marka: " + marka + "Model: " + model + "]";
+	}
+	
 	
 	
 }

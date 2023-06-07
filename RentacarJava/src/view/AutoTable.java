@@ -11,7 +11,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.LayoutStyle.ComponentPlacement;
 
 
 public class AutoTable extends JFrame {
@@ -20,26 +19,6 @@ public class AutoTable extends JFrame {
 	private JPanel contentPane;
 	private JScrollPane scrollPane;
 	private JTable autoTable;	
-	private JButton btnKlijent;
-	
-
-	/**
-	 * Launch the application.
-	 */
-	/*
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AutoTable frame = new AutoTable();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	
 
 	/**
 	 * Create the frame.
@@ -58,16 +37,8 @@ public class AutoTable extends JFrame {
 		JButton btnIznajmi = new JButton("Iznajmi");
 		btnIznajmi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//dispose();
-				//new RentPage().setVisible(true);
-			}
-		});
-		
-		btnKlijent = new JButton("Popuni podatke");
-		btnKlijent.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new KlijentPage().setVisible(true);
+				new RentPage().setVisible(true);
 			}
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -76,10 +47,7 @@ public class AutoTable extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(25)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(btnKlijent)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnIznajmi))
+						.addComponent(btnIznajmi)
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 397, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(28, Short.MAX_VALUE))
 		);
@@ -89,9 +57,7 @@ public class AutoTable extends JFrame {
 					.addContainerGap()
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 206, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnIznajmi)
-						.addComponent(btnKlijent))
+					.addComponent(btnIznajmi)
 					.addContainerGap(13, Short.MAX_VALUE))
 		);
 		

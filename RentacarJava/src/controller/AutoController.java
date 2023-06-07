@@ -71,11 +71,6 @@ public class AutoController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 
 		return null; // Vraćamo null ako auto nije pronađen
 	}
@@ -97,12 +92,6 @@ public class AutoController {
 			statement.executeUpdate();
 
 		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
