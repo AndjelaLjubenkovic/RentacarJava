@@ -10,7 +10,7 @@ Aplikacija je implementirana koristeći arhitekturu Model-View-Controller (MVC).
 * Controller sloj deluje kao posrednik između Modela i View-a. Obrada korisničkih zahteva i upravljanje logikom aplikacije obavljaju se u ovom sloju.
 
 ## Tehnologije i alati
-* Java
+* Java 17
 * Java Swing
 * MySQL
 * JDBC (Java Database Connectivity)
