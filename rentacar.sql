@@ -1,11 +1,9 @@
--- OVO JE BAZA KOJA JE USPESNO TESTIRANA!!!!! 
-
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 02, 2023 at 11:06 AM
+-- Generation Time: Jun 07, 2023 at 09:44 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `test_rentacar`
+-- Database: `rentacar`
 --
 
 -- --------------------------------------------------------
@@ -70,9 +68,9 @@ CREATE TABLE `Klijent` (
 --
 
 INSERT INTO `Klijent` (`klijent_id`, `ime`, `prezime`, `broj_telefona`, `broj_vozacke`, `user_id`) VALUES
-(1, 'Barney', 'Calhoon', '15556545', '12345', 1),
-(2, 'Stephanie', 'Lebowski', '155534342', '226654', 2),
-(3, 'Mike', 'McHorn', '1555457665', '203455632', 5);
+(1, 'Barney', 'Calhoon', '155567453', '12345', 1),
+(2, 'Jack', 'Grillo', '0674535227', '226654', 2),
+(3, 'MIke', 'Horn', '1555912145', '203455632', 5);
 
 -- --------------------------------------------------------
 
