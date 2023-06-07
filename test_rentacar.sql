@@ -70,9 +70,9 @@ CREATE TABLE `Klijent` (
 --
 
 INSERT INTO `Klijent` (`klijent_id`, `ime`, `prezime`, `broj_telefona`, `broj_vozacke`, `user_id`) VALUES
-(1, 'Cedomir', 'Ljepojevic', '611838453', '12345', 1),
-(2, 'Andjela', 'Trifunovic', '638821947', '226654', 2),
-(3, 'Petar', 'Petrovic', '64288733', '203455632', 5);
+(1, 'Barney', 'Calhoon', '15556545', '12345', 1),
+(2, 'Stephanie', 'Lebowski', '155534342', '226654', 2),
+(3, 'Mike', 'McHorn', '1555457665', '203455632', 5);
 
 -- --------------------------------------------------------
 
@@ -115,7 +115,7 @@ INSERT INTO `User` (`user_id`, `username`, `password`) VALUES
 (1, 'admin', 'admin'),
 (2, 'abc', '123'),
 (3, 'sis1234', 'sis1234'),
-(4, 'andjela2', '2andjela'),
+(4, 'half1', 'life2'),
 (5, 'peca30', 'javaphp');
 
 --
