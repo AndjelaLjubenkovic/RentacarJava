@@ -32,10 +32,14 @@ Da biste pokrenuli testove:
 
 ## Dalji razvoj 
 Za dalji razvoj aplikacije planiran je razvoj admin panela putem kojeg će admin imati mogućnosti:
-* Krweiranje auta
-* 
+* Kreiranje auta
+* Ažuriranje auta
+* Upravljanje korisničkim nalozima
+* Upravljanje podacima klijenata
+
 ## Autori
 Aplikacija je razvijena od strane:
 - Dušan Glišić [@DusanSistem](https://github.com/DusanSistem)
 - Andjela Ljubenković [@Andjelaljubenkovic](https://github.com/AndjelaLjubenkovic)
-- Mark Johnson [@markjohnson](https://github.com/markjohnson)
+- Čedomir Ljepojević [@cedaomirLjepojevic](https://github.com/cedaomirLjepojevic)
+- Ognjen Trifunović [@ognjengit](https://github.com/ognjengit)
