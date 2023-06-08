@@ -20,8 +20,7 @@ public class AutoController {
 	 */
 	public void dodajAuto(Auto auto) {
 		String query = "INSERT INTO Auto (marka, model, godiste, is_iznajmljen) VALUES (?, ?, ?, ?)";
-		try {
-			PreparedStatement statement = connection.prepareStatement(query);
+		try (PreparedStatement statement = connection.prepareStatement(query);){
 			statement.setString(1, auto.getMarka());
 			statement.setString(2, auto.getModel());
 			statement.setInt(3, auto.getGodiste());
@@ -29,11 +28,6 @@ public class AutoController {
 
 			statement.executeUpdate();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		try {
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -76,18 +70,18 @@ public class AutoController {
 
 	/**
 	 * 
-	 * @param auto ova metoda azurira novi auto
+	 * @param auto ova metoda azurira auto
 	 */
+	
 	public void azurirajAuto(Auto auto) {
+
 		String query = "UPDATE Auto SET marka=?, model=?, godiste=?, is_iznajmljen=? WHERE auto_id=?";
-		try {
-			PreparedStatement statement = connection.prepareStatement(query);
+		try (PreparedStatement statement = connection.prepareStatement(query)) {
 			statement.setString(1, auto.getMarka());
 			statement.setString(2, auto.getModel());
 			statement.setInt(3, auto.getGodiste());
 			statement.setBoolean(4, auto.isIznajmljen());
 			statement.setInt(5, auto.getAuto_id());
-
 			statement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -100,17 +94,12 @@ public class AutoController {
 	 * @param autoId ova metoda brise auto
 	 */
 	public void obrisiAuto(int autoId) {
+
 		String query = "DELETE FROM Auto WHERE auto_id=?";
-		try {
-			PreparedStatement statement = connection.prepareStatement(query);
+		try (PreparedStatement statement = connection.prepareStatement(query)) {
 			statement.setInt(1, autoId);
 			statement.executeUpdate();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		try {
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

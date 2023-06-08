@@ -13,4 +13,7 @@ module RentacarJava {
 	requires dbunit;
 	requires java.desktop;
 
+	exports controller;
+    exports model;
+    exports test;
 }

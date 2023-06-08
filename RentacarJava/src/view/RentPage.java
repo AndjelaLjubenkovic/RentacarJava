@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import controller.ClientController;
+import controller.KlijentController;
 import controller.RezervacijaController;
 import model.Auto;
 import model.Klijent;
@@ -29,7 +29,7 @@ public class RentPage extends JFrame {
 	private JTextField brVozackeField;
 	private JButton btnPotvrdi;
 
-	ClientController clientController = new ClientController();
+	KlijentController klijentController = new KlijentController();
 	RezervacijaController rezervacijaController = new RezervacijaController();
 
 	/**
@@ -108,8 +108,8 @@ public class RentPage extends JFrame {
 				k.setBroj_telefona(brTelefonaField.getText());
 				k.setBroj_vozacke(brVozackeField.getText());
 
-				clientController.createClient(k);
-				int created_klijent_id = clientController.createClient(k);
+				klijentController.dodajKlijenta(k);
+				int created_klijent_id = klijentController.dodajKlijenta(k);
 				
 				// Deo za kreiranje Auta
 				Auto selectedAuto = (Auto) comboBox.getSelectedItem();

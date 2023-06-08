@@ -28,8 +28,8 @@ public class RezervacijaControllerTest {
     @Test
     public void testDodajRezervaciju() {
         Rezervacija rezervacija = new Rezervacija();
-        rezervacija.setKlijent_id(1);
-        rezervacija.setAuto_id(1);
+        rezervacija.setKlijent_id(2);
+        rezervacija.setAuto_id(2);
 
         rezervacijaController.dodajRezervaciju(rezervacija);
 

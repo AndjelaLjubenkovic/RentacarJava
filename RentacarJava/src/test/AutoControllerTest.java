@@ -26,9 +26,9 @@ public class AutoControllerTest {
     @Test
     public void testDodajAuto() {
         Auto auto = new Auto();
-        auto.setMarka("BMW");
-        auto.setModel("X5");
-        auto.setGodiste(2021);
+        auto.setMarka("Volvo");
+        auto.setModel("XC90");
+        auto.setGodiste(2023);
         auto.setIznajmljen(false);
 
         autoController.dodajAuto(auto);
@@ -43,7 +43,7 @@ public class AutoControllerTest {
     @Test
     public void testAzurirajAuto() {
         // Pretpostavimo da postoji auto sa ID-jem 1 u bazi podataka
-        int autoId = 1;
+        int autoId = 2;
 
         Auto auto = new Auto();
         auto.setAuto_id(autoId);

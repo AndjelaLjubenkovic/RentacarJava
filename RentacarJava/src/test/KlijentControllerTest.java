@@ -1,6 +1,6 @@
 package test;
 
-import controller.ClientController;
+import controller.KlijentController;
 import konekcija.DBConnection;
 import model.Klijent;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,12 +10,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ClientControllerTest {
+public class KlijentControllerTest {
 
-    private ClientController clientController;
+    private KlijentController clientController;
     @BeforeEach
     public void setUp() {
-        clientController = new ClientController();
+        clientController = new KlijentController();
         DBConnection.getInstance().getConnection();
     }
 
@@ -23,16 +23,16 @@ public class ClientControllerTest {
      * Metoda koja proverava da li je klijent uspešno dodat u bazu
      */
     @Test
-    public int testCreateClient() {
+    public int testDodajKlijenta() {
         Klijent klijent = new Klijent();
         klijent.setIme("Marko");
         klijent.setPrezime("Markovic");
         klijent.setBroj_telefona("123456789");
         klijent.setBroj_vozacke("ABC123");
 
-        clientController.createClient(klijent);
+        clientController.dodajKlijenta(klijent);
 
-        List<Klijent> klijenti = clientController.getAllClients();
+        List<Klijent> klijenti = clientController.dobaviSveKlijente();
         assertTrue(klijenti.contains(klijent));
         
         return klijent.getKlijent_id();
@@ -42,9 +42,9 @@ public class ClientControllerTest {
      * Metoda koja testira dobavljanje svih klijenata iz baze
      */
     @Test
-    public void testGetAllClients() {
+    public void testDobaviSveKlijente() {
 
-        List<Klijent> klijenti = clientController.getAllClients();
+        List<Klijent> klijenti = clientController.dobaviSveKlijente();
         assertNotNull(klijenti);
         assertFalse(klijenti.isEmpty());
     }
@@ -53,11 +53,11 @@ public class ClientControllerTest {
      * Metoda koja testira dobavljanje klijenta po ID-u
      */
     @Test
-    public void testGetClientById() {
+    public void testDobaviKlijenta() {
         // Pretpostavimo da postoji klijent sa ID-jem 1 u bazi podataka
-        int klijentId = 1;
+        int klijentId = 2;
 
-        Klijent klijent = clientController.getClientById(klijentId);
+        Klijent klijent = clientController.dobaviKlijenta(klijentId);
         assertNotNull(klijent);
         assertEquals(klijentId, klijent.getKlijent_id());
     }
@@ -66,11 +66,11 @@ public class ClientControllerTest {
      * Metoda koja testira ažuriranje klijenta u bazi
      */
     @Test
-    public void testUpdateClient() {
+    public void testAzurirajKlijenta() {
         // Pretpostavimo da postoji klijent sa ID-jem 1 u bazi podataka
-        int klijentId = 1;
+        int klijentId = 2;
 
-        Klijent klijent = clientController.getClientById(klijentId);
+        Klijent klijent = clientController.dobaviKlijenta(klijentId);
         assertNotNull(klijent);
 
         // Ažuriranje podataka klijenta
@@ -79,23 +79,28 @@ public class ClientControllerTest {
         klijent.setBroj_telefona("987654321");
         klijent.setBroj_vozacke("XYZ789");
 
-        clientController.updateClient(klijent);
+        clientController.azurirajKlijenta(klijent);
 
-        Klijent azuriraniKlijent = clientController.getClientById(klijentId);
-        assertEquals(klijent, azuriraniKlijent);
+        Klijent azuriraniKlijent = clientController.dobaviKlijenta(klijentId);
+        assertEquals(klijent.getIme(), azuriraniKlijent.getIme());
+        assertEquals(klijent.getPrezime(), azuriraniKlijent.getPrezime());
+        assertEquals(klijent.getBroj_telefona(), azuriraniKlijent.getBroj_telefona());
+        assertEquals(klijent.getBroj_vozacke(), azuriraniKlijent.getBroj_vozacke());
+
+        //assertEquals(klijent, azuriraniKlijent);
     }
 
     /**
      * Metoda koja testira brisanje klijenta iz baze
      */
     @Test
-    public void testDeleteClient() {
+    public void testObrisiKlijenta() {
         // Pretpostavimo da postoji klijent sa ID-jem 1 u bazi podataka
         int klijentId = 1;
 
-        clientController.deleteClient(klijentId);
+        clientController.obrisiKlijenta(klijentId);
 
-        List<Klijent> klijenti = clientController.getAllClients();
+        List<Klijent> klijenti = clientController.dobaviSveKlijente();
         assertFalse(klijenti.stream().anyMatch(klijent -> klijent.getKlijent_id() == klijentId));
     }
 
