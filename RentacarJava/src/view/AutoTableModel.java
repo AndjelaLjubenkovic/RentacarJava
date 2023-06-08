@@ -1,6 +1,5 @@
 package view;
 
-import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
 import controller.AutoController;
@@ -15,15 +14,6 @@ public class AutoTableModel extends AbstractTableModel {
 	public AutoController ac = new AutoController();
 	private ArrayList<Auto> listaAuto = new ArrayList<>();
 
-	/*
-	public ArrayList<Auto> getAutomobili() {
-		for (Auto auto : listaAuto) {
-			listaAuto.add(auto);
-		}
-		return listaAuto;
-	}
-	*/
-
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 
@@ -34,28 +24,6 @@ public class AutoTableModel extends AbstractTableModel {
 		case 3 -> listaAuto.get(rowIndex).isIznajmljen();
 		default -> "-";
 		};
-	}
-
-	@Override
-	public Class<?> getColumnClass(int columnIndex) {
-		if (columnIndex == 4) {
-			return JButton.class;
-		} else {
-			return super.getColumnClass(columnIndex);
-		}
-	}
-
-	@Override
-	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return columnIndex == 4;
-	}
-
-	@Override
-	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-		if (columnIndex == 4) {
-			// Ovdje možete implementirati logiku za iznajmljivanje
-			// na temelju rowIndex-a
-		}
 	}
 
 	@Override
@@ -79,6 +47,10 @@ public class AutoTableModel extends AbstractTableModel {
 		fireTableDataChanged();
 	}
 
+	/**
+	 * Metoda koja vraca sve dostupne automobile za iznajmljivanje
+	 * @return ArrayList
+	 */
 	public ArrayList<Auto> getDostupniAutomobili() {
 
 		ArrayList<Auto> dostupniAutomobili = new ArrayList<>();

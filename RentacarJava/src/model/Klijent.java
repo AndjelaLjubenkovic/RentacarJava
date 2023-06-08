@@ -88,5 +88,13 @@ public class Klijent {
 		super();
 	}
 
+	@Override
+	public String toString() {
+		return "Klijent [ime=" + ime + ", prezime=" + prezime + ", broj_telefona=" + broj_telefona + ", broj_vozacke="
+				+ broj_vozacke + "]";
+	}
+	
+	
+
 	
 }

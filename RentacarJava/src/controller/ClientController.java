@@ -19,7 +19,7 @@ public class ClientController {
     }
     
     /**
-     * Sluzi za kreiranje novog klijenta
+     * Sluzi za kreiranje novog klijentai vraca klijent_id
      * @param client
      */
     
@@ -129,7 +129,6 @@ public class ClientController {
         try {
 			connection.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
