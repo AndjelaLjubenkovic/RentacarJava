@@ -9,6 +9,9 @@ Aplikacija je implementirana koristeći arhitekturu Model-View-Controller (MVC).
 * View sloj je odgovoran za prikazivanje korisničkog interfejsa i interakciju sa korisnikom. Koristi se Java Swing biblioteka za izradu grafičkog korisničkog interfejsa.
 * Controller sloj deluje kao posrednik između Modela i View-a. Obrada korisničkih zahteva i upravljanje logikom aplikacije obavljaju se u ovom sloju.
 
+<img width="1177" alt="Screenshot 2023-06-01 at 16 04 50" src="https://github.com/AndjelaLjubenkovic/RentacarJava/assets/133763197/67c1365e-700e-4cc6-aa09-47bfa7c19880">
+
+
 ## Tehnologije i alati
 * Java 17
 * Java Swing
